@@ -4,7 +4,7 @@ x=int(input("Enter the number:"))
 os.system("cls")
 bin=0
 sum=0
-compareVar=[1024,512,256,128,64,32,16,8,4,2,1]
+compareVar=[2048,1024,512,256,128,64,32,16,8,4,2,1]
 for i in range(len(compareVar)):
     if(sum>x):
         continue
