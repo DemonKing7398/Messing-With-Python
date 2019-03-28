@@ -1,57 +1,34 @@
-def emitter(alpha,string,alpha_count):
-    for i in range(len(alpha)):
-        for j in range(len(string)):
-            if(alpha[i]==string[j]):
-                for k in range(j+1,len(string)+1):
-                    vallu=True
-                    word=string[j:k]
-                    for l in range(len(alpha_count)):
-                        if(word==alpha_count[l]):
-                            vallu=False
-                    if(vallu):
-                        alpha_count.append(word)
-    return alpha_count   
 def minion_game(string):
-    # Game Of vowels Vs consonant
-    string=string.upper()
-    stuart,kevin=0,0
-    vowels,conso=[],[]
+    setStuart=set()
+    setStuart2=set()
+    setKevin=set()
+    setKevin=set()
+    countStuart,countKevin=0,0
     for i in range(len(string)):
-        vallu=True
-        if string[i] in 'AEIOU':
-            for j in range(len(vowels)):
-                if(vowels[j]==string[i]):
-                    vallu=False
-             
-            if vallu:
-                vowels.append(string[i])
+        if string[i] in 'AIEOU':
+            setKevin.add(string[i])
+            countKevin+=1
+            j=i+1
+            while(j<len(string)):
+                setKevin.add(string[i:j+1])
+                countKevin+=1
+                j+=1
         else:
-            for j in range(len(conso)):
-                if(conso[j]==string[i]):
-                    vallu=False
-            
-            if vallu:
-                conso.append(string[i])    
-    vowels_count,conso_count=vowels,conso
-    vowels_count=emitter(vowels,string,vowels_count)
-    conso_count=emitter(conso,string,conso_count)
-    for i in range(len(vowels_count)):
-        for j in range(len(string)+1):
-            if(string[j:j+len(vowels_count[i])]==vowels_count[i]):
-                kevin+=1
-    for i in range(len(conso_count)):
-        for j in range(len(string)+1):
-            if(string[j:j+len(conso_count[i])]==conso_count[i]):
-                stuart+=1       
-    if(stuart== kevin):
+            setStuart.add(string[i])
+            countStuart+=1
+            j=i+1
+            while(j<len(string)):
+                setStuart.add(string[i:j+1])
+                countStuart+=1
+                j+=1
+    if countStuart==countKevin:
         print("Draw")
-    elif(stuart>kevin):
-        print("Stuart",stuart)
+    elif countStuart>countKevin:
+        print("Stuart "+str(countStuart))
     else:
-        print("Kevin",kevin)    
+        print("Kevin "+str(countKevin))
 
 
-    input()
 if __name__ == '__main__':
-    s = input("Enter a Word")
+    s = raw_input()
     minion_game(s)
